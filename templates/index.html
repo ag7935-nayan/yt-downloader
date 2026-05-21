@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
   <meta charset="UTF-8">
@@ -8,7 +7,7 @@
 
   <title>Gurukul YouTube Downloader</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
@@ -16,48 +15,36 @@
 
 <div class="container">
 
-  <!-- LOGO -->
   <img
-    src="images.jpg"
+    src="{{ url_for('static', filename='images.jpg') }}"
     class="logo"
   >
 
-  <!-- HEADING -->
   <h1>
     <span>YouTube</span> Video Downloader
   </h1>
 
-  <!-- BOX -->
   <div class="download-box">
 
-    <div class="input-box">
-
-      <input
-        type="text"
-        id="videoUrl"
-        placeholder="Paste YouTube link here..."
-      >
-
-    </div>
+    <input
+      type="text"
+      id="videoUrl"
+      placeholder="Paste YouTube video link here..."
+    >
 
     <button onclick="getVideoInfo()">
       Fetch Video
     </button>
 
-    <!-- PREVIEW -->
     <div id="preview" class="hidden">
 
       <img id="thumbnail">
 
       <h2 id="title"></h2>
 
-      <div class="buttons">
-
-        <button onclick="downloadVideo()">
-          Download Video
-        </button>
-
-      </div>
+      <button onclick="downloadVideo()">
+        Download Video
+      </button>
 
     </div>
 
@@ -65,7 +52,7 @@
 
 </div>
 
-<script src="script.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 </html>
