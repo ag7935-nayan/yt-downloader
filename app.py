@@ -1,8 +1,8 @@
-from flask import Flask, request, jsonify, send_file, send_from_directory
+from flask import Flask, render_template, request, jsonify, send_file
 import yt_dlp
 import os
 
-app = Flask(__name__, static_folder='.')
+app = Flask(__name__)
 
 DOWNLOAD_FOLDER = "downloads"
 
@@ -10,24 +10,22 @@ if not os.path.exists(DOWNLOAD_FOLDER):
     os.makedirs(DOWNLOAD_FOLDER)
 
 
-# HOME PAGE
 @app.route("/")
 def home():
-    return send_from_directory('.', 'index.html')
+    return render_template("index.html")
 
 
-# VIDEO INFO
 @app.route("/video-info", methods=["POST"])
 def video_info():
 
     data = request.get_json()
     url = data["url"]
 
-    ydl_opts = {
-        'quiet': True
-    }
-
     try:
+
+        ydl_opts = {
+            'quiet': True
+        }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(url, download=False)
@@ -44,7 +42,6 @@ def video_info():
         })
 
 
-# DOWNLOAD VIDEO
 @app.route("/download", methods=["POST"])
 def download():
 
@@ -74,6 +71,5 @@ def download():
         })
 
 
-# RUN
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
