@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Gurukul YouTube Downloader</title>
+
+  <link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <img
+    src="https://gurukul.org/wp-content/uploads/2022/06/logo.png"
+    class="logo"
+  >
+
+  <h1>
+    <span>YouTube</span> Video Downloader
+  </h1>
+
+  <div class="download-box">
+
+    <div class="input-box">
+
+      <input
+        type="text"
+        id="videoUrl"
+        placeholder="Paste YouTube link here..."
+      >
+
+    </div>
+
+    <button onclick="getVideoInfo()">
+      Fetch Video
+    </button>
+
+    <div id="preview" class="hidden">
+
+      <img id="thumbnail">
+
+      <h2 id="title"></h2>
+
+      <div class="buttons">
+
+        <button onclick="downloadVideo('mp4')">
+          Download MP4
+        </button>
+
+        <button onclick="downloadVideo('mp3')">
+          Download MP3
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>
