@@ -36,7 +36,7 @@ async function getVideoInfo(){
 }
 
 
-async function downloadVideo(format){
+async function downloadVideo(){
 
     const url = document.getElementById("videoUrl").value;
 
@@ -49,8 +49,7 @@ async function downloadVideo(format){
         },
 
         body:JSON.stringify({
-            url:url,
-            format:format
+            url:url
         })
 
     });
