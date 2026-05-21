@@ -8,7 +8,7 @@
 
   <title>Gurukul YouTube Downloader</title>
 
-  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -16,15 +16,18 @@
 
 <div class="container">
 
+  <!-- LOGO -->
   <img
-  src="images.jpg"
-  class="logo"
->
+    src="images.jpg"
+    class="logo"
+  >
 
+  <!-- HEADING -->
   <h1>
     <span>YouTube</span> Video Downloader
   </h1>
 
+  <!-- BOX -->
   <div class="download-box">
 
     <div class="input-box">
@@ -41,6 +44,7 @@
       Fetch Video
     </button>
 
+    <!-- PREVIEW -->
     <div id="preview" class="hidden">
 
       <img id="thumbnail">
@@ -49,12 +53,8 @@
 
       <div class="buttons">
 
-        <button onclick="downloadVideo('mp4')">
-          Download MP4
-        </button>
-
-        <button onclick="downloadVideo('mp3')">
-          Download MP3
+        <button onclick="downloadVideo()">
+          Download Video
         </button>
 
       </div>
@@ -65,7 +65,7 @@
 
 </div>
 
-<script src="/static/script.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
