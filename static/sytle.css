@@ -6,16 +6,17 @@
 }
 
 body{
-  height:100vh;
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:linear-gradient(to bottom right,#ffffff,#ffecec);
+  background:linear-gradient(to bottom right,#ffffff,#ffeaea);
+  padding:20px;
 }
 
 .container{
-  width:90%;
-  max-width:900px;
+  width:100%;
+  max-width:850px;
   text-align:center;
 }
 
@@ -26,7 +27,7 @@ body{
 
 h1{
   font-size:60px;
-  margin-bottom:30px;
+  margin-bottom:35px;
 }
 
 h1 span{
@@ -37,34 +38,32 @@ h1 span{
   background:white;
   padding:40px;
   border-radius:25px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  box-shadow:0 10px 40px rgba(0,0,0,0.1);
 }
 
-.input-box{
+input{
+  width:100%;
+  padding:18px;
+  border:2px solid #ddd;
+  border-radius:15px;
+  font-size:18px;
   margin-bottom:20px;
 }
 
-.input-box input{
-  width:100%;
-  padding:18px;
-  border-radius:15px;
-  border:2px solid #ddd;
-  font-size:20px;
-}
-
 button{
-  border:none;
-  padding:15px 35px;
   background:red;
   color:white;
-  font-size:20px;
+  border:none;
+  padding:15px 35px;
   border-radius:15px;
+  font-size:20px;
   cursor:pointer;
   transition:0.3s;
 }
 
 button:hover{
-  background:#d60000;
+  background:#d40000;
+  transform:scale(1.03);
 }
 
 #preview{
@@ -81,12 +80,6 @@ button:hover{
   margin-bottom:20px;
 }
 
-.buttons{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-}
-
 .hidden{
   display:none;
 }
@@ -94,18 +87,14 @@ button:hover{
 @media(max-width:768px){
 
   h1{
-    font-size:40px;
+    font-size:38px;
   }
 
   .logo{
     width:220px;
   }
 
-  .buttons{
-    flex-direction:column;
-  }
-
-  button{
-    width:100%;
+  .download-box{
+    padding:25px;
   }
 }
