@@ -1,19 +1,22 @@
-from flask import Flask, render_template, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, send_from_directory
 import yt_dlp
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='.')
 
 DOWNLOAD_FOLDER = "downloads"
 
 if not os.path.exists(DOWNLOAD_FOLDER):
     os.makedirs(DOWNLOAD_FOLDER)
 
+
+# HOME PAGE
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return send_from_directory('.', 'index.html')
 
 
+# VIDEO INFO
 @app.route("/video-info", methods=["POST"])
 def video_info():
 
@@ -25,6 +28,7 @@ def video_info():
     }
 
     try:
+
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(url, download=False)
 
@@ -34,39 +38,26 @@ def video_info():
         })
 
     except Exception as e:
+
         return jsonify({
             "error": str(e)
         })
 
 
+# DOWNLOAD VIDEO
 @app.route("/download", methods=["POST"])
 def download():
 
     data = request.get_json()
 
     url = data["url"]
-    format_type = data["format"]
 
     try:
 
-        if format_type == "mp3":
-
-            ydl_opts = {
-                'format': 'bestaudio/best',
-                'outtmpl': f'{DOWNLOAD_FOLDER}/%(title)s.%(ext)s',
-                'postprocessors': [{
-                    'key': 'FFmpegExtractAudio',
-                    'preferredcodec': 'mp3',
-                    'preferredquality': '192',
-                }],
-            }
-
-        else:
-
-            ydl_opts = {
-                'format': 'best',
-                'outtmpl': f'{DOWNLOAD_FOLDER}/%(title)s.%(ext)s'
-            }
+        ydl_opts = {
+            'format': 'best',
+            'outtmpl': f'{DOWNLOAD_FOLDER}/%(title)s.%(ext)s'
+        }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
 
@@ -74,16 +65,15 @@ def download():
 
             file_path = ydl.prepare_filename(info)
 
-            if format_type == "mp3":
-                file_path = file_path.rsplit(".",1)[0] + ".mp3"
-
         return send_file(file_path, as_attachment=True)
 
     except Exception as e:
+
         return jsonify({
             "error": str(e)
         })
 
 
+# RUN
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
